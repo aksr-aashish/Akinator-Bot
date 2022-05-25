@@ -203,7 +203,7 @@ def aki_lead(update: Update, _:CallbackContext) -> None:
 def get_lead_total(lead_list: list, lead_category: str) -> str:
     lead = f'Top 10 {lead_category} are :\n'
     for i in lead_list:
-        lead = lead+f"{i[0]} : {i[1]}\n"
+        lead = f"{lead}{i[0]} : {i[1]}\n"
     return lead
 
 
