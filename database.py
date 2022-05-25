@@ -165,15 +165,16 @@ def updateTotalQuestions(user_id: int, total_questions: int) -> None:
     """
     
     """
-    total_questions = total_questions+ getTotalQuestions(user_id)
+    total_questions += getTotalQuestions(user_id)
     my_db["users"].update_one({"user_id": user_id}, {"$set": {"total_questions": total_questions}})
 
 
 ################# LEADERBOARD FUNCTIONS ####################
 
 def getLead(what:str) -> list:
-    lead_dict = {}
-    for user in my_db['users'].find({}):
-        lead_dict.update({user['first_name']: user[what]})
+    lead_dict = {
+        user['first_name']: user[what] for user in my_db['users'].find({})
+    }
+
     lead_dict = sorted(lead_dict.items(), key=lambda x: x[1], reverse=True)
     return lead_dict[:10]
